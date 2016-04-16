@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import plotlyi
+import plotly
 
 # set api keys
 
