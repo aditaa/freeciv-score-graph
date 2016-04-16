@@ -1,6 +1,8 @@
+#dont track default score log
 freeciv-score.log
 
-
+#dont track api creads
+set_plotly_creds.py
 
 
 #default python git ignore 
