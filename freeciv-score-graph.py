@@ -10,18 +10,33 @@ import time
 from plotly import tools
 import plotly.plotly as py
 import plotly.graph_objs as go
+import argparse
 
 #set vars
-logfile = "freeciv-score.log"
+#logfile = "freeciv-score.log"
 
 
 #def functions
 
 #define main program
 def main():
+    #read options
+    logfile = options()
+    print logfile
+    #read logfile
     id, tags, players, data, turns = read(logfile)
+
+    #proccess data
     build(id, tags, players, data, turns)
     return
+
+#read for options
+def options():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("logfile", help="The FreeCIV score file to proccess")
+    arg = parser.parse_args()
+    return arg.logfile
+
 
 #read log file
 def read( logfile ):
@@ -92,10 +107,7 @@ def build(id, tags, players, data, turns):
             score = go.Scatter(
                 x = turns,
                 y = data[25][i],
-                name = players[i],
-
-#                color = ('rgb(205, 12, 24)'),
-#                width = 4)
+                name = players[i]
             )
             plot.append(score)
         plot_url = py.plot(plot, filename=id)
