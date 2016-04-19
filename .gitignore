@@ -4,6 +4,8 @@ freeciv-score.log
 #dont track api creads
 set_plotly_creds.py
 
+#swap files for editing
+*.swp
 
 #default python git ignore 
 
