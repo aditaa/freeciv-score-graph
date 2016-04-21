@@ -111,6 +111,7 @@ def build(id, tags, players, data, turns):
             )
             plot.append(score)
         plot_url = py.plot(plot, filename=id)
+        print plot_url
 
 #if not imported run main program
 if __name__ == "__main__":
