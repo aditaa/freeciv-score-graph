@@ -25,25 +25,28 @@ def main():
     parser = argparse.ArgumentParser(prog='Freeciv score graph')
     parser.add_argument("-l", "--logfile", help="The FreeCIV score file to proccess", nargs='?', 
                         type=argparse.FileType('r'), default='freeciv-score.log')
+    parser.add_argument("--listgraphs", help="Lists graphs and there option numbers",
+                        action="store_true")
     arg = parser.parse_args()
-    print arg.logfile
 
     #read logfile
     id, tags, players, data, turns = read(arg.logfile)
 
     #proccess data
-    print build(id, tags, players, data, turns)
+    if arg.listgraphs:
+        print "{:<8} {:<15}".format('Key','Description')
+        print "-"*20
+        for tag, descr in tags.iteritems():
+            print "{:<8} {:<15}".format(tag, descr)
+        print "-"*20
+    else:
+        print build(id, tags, players, data, turns)
     return
 
 
 
 #read log file
 def read( logfile ):
-    #open file for reading
-#    try:
-#        f = open(logfile, 'r')
-#    except:
-#        print "Can not open logfile"
 
     #set working vars
     id = ""
@@ -98,6 +101,7 @@ def read( logfile ):
 
 
     return id, tags, players, data, turns
+
 
 #build graphs
 def build(id, tags, players, data, turns):
