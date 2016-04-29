@@ -6,6 +6,7 @@ set_plotly_creds.py
 
 #swap files for editing
 *.swp
+*.swo
 
 #default python git ignore 
 
