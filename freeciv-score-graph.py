@@ -20,22 +20,20 @@ import argparse
 
 #define main program
 def main():
+
     #read options
-    logfile = options()
-    print logfile
+    parser = argparse.ArgumentParser(prog='Freeciv score graph')
+    parser.add_argument("-l", "--logfile", help="The FreeCIV score file to proccess", default='freeciv-score.log')
+    arg = parser.parse_args()
+    print arg.logfile
+
     #read logfile
-    id, tags, players, data, turns = read(logfile)
+    id, tags, players, data, turns = read(arg.logfile)
 
     #proccess data
-    build(id, tags, players, data, turns)
+    print build(id, tags, players, data, turns)
     return
 
-#read for options
-def options():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("logfile", help="The FreeCIV score file to proccess")
-    arg = parser.parse_args()
-    return arg.logfile
 
 
 #read log file
@@ -102,16 +100,16 @@ def read( logfile ):
 
 #build graphs
 def build(id, tags, players, data, turns):
-        plot = []
-        for i in players:
-            score = go.Scatter(
-                x = turns,
-                y = data[25][i],
-                name = players[i]
-            )
-            plot.append(score)
-        plot_url = py.plot(plot, filename=id)
-        print plot_url
+    plot = []
+    for i in players:
+        score = go.Scatter(
+            x = turns,
+            y = data[25][i],
+            name = players[i]
+        )
+        plot.append(score)
+    plot_url = py.plot(plot, filename=id)
+    return plot_url
 
 #if not imported run main program
 if __name__ == "__main__":
