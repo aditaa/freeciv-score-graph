@@ -23,7 +23,8 @@ def main():
 
     #read options
     parser = argparse.ArgumentParser(prog='Freeciv score graph')
-    parser.add_argument("-l", "--logfile", help="The FreeCIV score file to proccess", default='freeciv-score.log')
+    parser.add_argument("-l", "--logfile", help="The FreeCIV score file to proccess", nargs='?', 
+                        type=argparse.FileType('r'), default='freeciv-score.log')
     arg = parser.parse_args()
     print arg.logfile
 
@@ -39,10 +40,10 @@ def main():
 #read log file
 def read( logfile ):
     #open file for reading
-    try:
-        f = open(logfile, 'r')
-    except:
-        print "Can not open logfile"
+#    try:
+#        f = open(logfile, 'r')
+#    except:
+#        print "Can not open logfile"
 
     #set working vars
     id = ""
@@ -52,7 +53,7 @@ def read( logfile ):
     data = {}
 
     #digst the file
-    for line in f:
+    for line in logfile:
         if line[0] in ['\n', "#"]:
             continue
 
